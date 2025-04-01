@@ -5,8 +5,8 @@ const arcjetMiddleware = async (req,res,next)=>{
         const decision = await aj.protect(req, {requested: 1}); 
 
         if(decision.isDenied()){
-            if(decision.resson.isRateLimit()) return res.status(429).json({error: 'Rate Limit Aceeded'});
-            if(decision.resson.isBot()) return res.status(403).json({error: 'Bot detected'});
+            if(decision.reason.isRateLimit()) return res.status(429).json({error: 'Rate Limit Aceeded'});
+            if(decision.reason.isBot()) return res.status(403).json({error: 'Bot detected'});
 
             return res.status(403).json({error: 'Access denined'});
         }
